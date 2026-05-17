@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c0b0a;
+  --foreground: #f5f0e8;
+  --charcoal: #0c0b0a;
+  --charcoal-soft: #161412;
+  --charcoal-elevated: #1e1b18;
+  --copper: #b87333;
+  --copper-light: #c9a87c;
+  --copper-dark: #8b5a2b;
+  --champagne: #e8dcc8;
+  --champagne-muted: #c4b59a;
+  --sand: #2a2622;
+  --cream: #faf7f2;
+  --muted: #9a9188;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-soft: var(--charcoal-soft);
+  --color-charcoal-elevated: var(--charcoal-elevated);
+  --color-copper: var(--copper);
+  --color-copper-light: var(--copper-light);
+  --color-copper-dark: var(--copper-dark);
+  --color-champagne: var(--champagne);
+  --color-champagne-muted: var(--champagne-muted);
+  --color-sand: var(--sand);
+  --color-cream: var(--cream);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-signature: var(--font-signature);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
+.font-signature {
+  font-family: var(--font-signature), "Brush Script MT", cursive;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--copper) 40%, transparent);
+  color: var(--champagne);
+}
+
+.prose-hostkech {
+  color: var(--champagne-muted);
+  line-height: 1.85;
+  font-size: 1.0625rem;
+}
+
+.prose-hostkech h2 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--champagne);
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.prose-hostkech h3 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--champagne);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-hostkech p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-hostkech ul,
+.prose-hostkech ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.prose-hostkech li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-hostkech a {
+  color: var(--copper-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-hostkech a:hover {
+  color: var(--champagne);
+}
+
+.prose-hostkech strong {
+  color: var(--champagne);
+  font-weight: 500;
+}
+
+.prose-hostkech blockquote {
+  border-left: 2px solid var(--copper);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--champagne);
+}
+
+.gradient-copper {
+  background: linear-gradient(135deg, var(--copper-light), var(--copper), var(--copper-dark));
+}
+
+.text-gradient-copper {
+  background: linear-gradient(135deg, var(--champagne), var(--copper-light), var(--copper));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-light {
+  background: var(--cream);
+  color: var(--charcoal);
+}
+
+.section-light .text-muted {
+  color: #5c554c;
+}
+
+@keyframes review-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.review-marquee-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  animation: review-marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.review-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-marquee-track {
+    animation: none;
+  }
+
+  .review-marquee-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .review-marquee-track > * {
+    scroll-snap-align: start;
+  }
 }
